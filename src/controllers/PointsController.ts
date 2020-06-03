@@ -1,4 +1,4 @@
-import { Request, Response, response } from 'express';
+import { Request, Response } from 'express';
 import knex from '../database/connection';
 
 class PointsController {
@@ -43,7 +43,6 @@ class PointsController {
     };
 
     const insertedIds = await trx('points').insert(point);
-  
     const point_id = insertedIds[0];
   
     const pointItems = items.map((item_id: number) => {
@@ -54,7 +53,9 @@ class PointsController {
     });
   
     await trx('point_items').insert(pointItems);
-  
+    
+    trx.commit();
+
     return res.json({
       id: point_id,
       ...point
