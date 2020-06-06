@@ -1,3 +1,7 @@
+# Uploaded images
+uploads/*
+!uploads/*.svg
+
 # Database
 *.sqlite
 *.sqlite-journal
